@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>WebRTC UT</title>
+	<style>
+		body {background-color: transparent;}
+		video {
+			position:absolute;
+			left: 300px;
+			top: 200px;
+		}
+	</style>
+</head>
+
+
+
+<body onload="loadMedia()">
+
+<video secondary id="selfPreview" width=480 height=360></video>
+
+<script>
+function loadMedia() {
+	videoElement = document.getElementById("selfPreview");
+	
+    navigator.mediaDevices.getUserMedia({
+        audio: true,
+        video: {
+            mandatory: {
+                minWidth: 480,
+                maxWidth: 480,
+                minHeight: 360,
+                maxHeight: 360,
+            }
+        },
+      }).then(stream => {
+        videoElement.srcObject = stream;
+        videoElement.muted = true;
+        videoElement.play();
+      }).catch((err) => {
+        console.log("Something went wrong")
+      });      
+} 
+</script>
+
+</body>
+</html>
